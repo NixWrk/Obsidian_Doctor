@@ -1,0 +1,36 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<section class="card">
+  <a href="/">← Back</a>
+  <h2>{{ problem.title }}</h2>
+  <div class="meta-row">
+    <span class="badge {{ problem.severity }}">{{ problem.severity }}</span>
+    <span>{{ problem.category }}</span>
+    <span>{{ problem.id }}</span>
+  </div>
+  <p>{{ problem.description }}</p>
+
+  <h3>Objects</h3>
+  <ul>
+    {% for obj in problem.objects %}
+      <li>
+        {{ obj.path }}
+        {% if obj.line %}(line {{ obj.line }}){% endif %}
+        {% set abs_path = report.vault.path ~ '/' ~ obj.path %}
+        <a href="/open?path={{ abs_path | urlencode }}&back={{ request.url.path | urlencode }}">open</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>Evidence</h3>
+  <pre>{{ problem.evidence | tojson(indent=2) }}</pre>
+
+  <h3>Suggested Actions</h3>
+  <ul>
+    {% for action in problem.suggested_actions %}
+      <li>{{ action }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<section class="summary-grid">
+  <article class="card">
+    <h3>Total Problems</h3>
+    <div class="big">{{ summary.total_problems or 0 }}</div>
+  </article>
+  <article class="card">
+    <h3>Notes</h3>
+    <div class="big">{{ report.vault.note_count }}</div>
+  </article>
+  <article class="card">
+    <h3>Attachments</h3>
+    <div class="big">{{ report.vault.attachment_count }}</div>
+  </article>
+  <article class="card">
+    <h3>Daily Notes</h3>
+    <div class="big">{{ report.vault.daily_note_count }}</div>
+  </article>
+</section>
+
+<section class="filters card">
+  <form method="get" action="/">
+    <label>Category
+      <select name="category">
+        <option value="">All</option>
+        {% for item in categories %}
+          <option value="{{ item }}" {% if selected_category == item %}selected{% endif %}>{{ item }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Severity
+      <select name="severity">
+        <option value="">All</option>
+        {% for item in severities %}
+          <option value="{{ item }}" {% if selected_severity == item %}selected{% endif %}>{{ item }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Search
+      <input type="text" name="q" value="{{ query }}" placeholder="title, description, path" />
+    </label>
+    <button type="submit">Apply</button>
+    <a class="button secondary" href="/">Reset</a>
+  </form>
+</section>
+
+<section class="card">
+  <h3>Problems ({{ problems|length }})</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Category</th>
+        <th>Severity</th>
+        <th>Title</th>
+        <th>Object</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for problem in problems %}
+      <tr>
+        <td>{{ problem.id }}</td>
+        <td>{{ problem.category }}</td>
+        <td><span class="badge {{ problem.severity }}">{{ problem.severity }}</span></td>
+        <td>{{ problem.title }}</td>
+        <td>
+          {% if problem.objects and problem.objects[0].path %}
+            {{ problem.objects[0].path }}
+          {% endif %}
+        </td>
+        <td>
+          <a href="/problem/{{ problem.id }}">Details</a>
+          {% if problem.objects and problem.objects[0].path %}
+            {% set abs_path = report.vault.path ~ '/' ~ problem.objects[0].path %}
+            <a href="/open?path={{ abs_path | urlencode }}&back={{ request.url.path | urlencode }}">Open</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
