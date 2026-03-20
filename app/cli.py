@@ -33,12 +33,15 @@ def main() -> int:
     if args.command == "scan":
         from app.reporting.pipeline import run_scan_to_file
 
-        run_scan_to_file(
+        report = run_scan_to_file(
             vault_path=args.vault,
             config_path=args.config,
             profile=args.profile,
             output_path=args.out,
         )
+        print(f"scan_id={report.scan_id}")
+        print(f"problems={report.summary['total_problems']}")
+        print(f"report={args.out.resolve()}")
         return 0
 
     if args.command == "gui":
