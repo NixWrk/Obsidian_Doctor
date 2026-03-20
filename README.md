@@ -224,3 +224,55 @@ obsidian-doctor/
 └─ examples/
    ├─ reports/
    └─ configs/
+
+---
+
+## Статус прототипа (v0.1)
+
+В репозитории реализован рабочий read-only прототип `Obsidian Doctor`:
+
+- scan одного vault за запуск;
+- индексация заметок и вложений;
+- парсинг `wikilinks`, `embeds`, `markdown links`, `frontmatter`;
+- построение графа входящих/исходящих связей;
+- 16 обязательных правил MVP;
+- JSON-отчёт;
+- локальный GUI (FastAPI) с фильтрами и карточкой проблемы;
+- CLI режимы `scan` и `gui`.
+
+### Быстрый запуск
+
+```bash
+python -m venv .venv
+. .venv/Scripts/activate
+pip install -e .
+```
+
+Сканирование:
+
+```bash
+python -m app scan --vault D:/path/to/vault --config example_config.yaml --out reports/report.json
+```
+
+GUI по готовому отчёту:
+
+```bash
+python -m app gui --report reports/report.json
+```
+
+GUI с прямым сканированием:
+
+```bash
+python -m app gui --vault D:/path/to/vault --config example_config.yaml
+```
+
+### Конфигурация и примеры
+
+- пример конфигурации: `example_config.yaml`
+- пример отчёта: `example_report.json`
+
+### Текущие ограничения
+
+- режим `apply/fix` не реализован (только анализ и отчёты);
+- near-duplicate по текстовому сходству отложен на следующий этап;
+- резолвинг некоторых редких edge-cases ссылок реализован как best-effort.

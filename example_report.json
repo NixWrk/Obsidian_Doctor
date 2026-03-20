@@ -1,0 +1,119 @@
+﻿{
+  "scan_id": "3e1ce2b8-8fa1-4a44-8724-5dd7026aef7e",
+  "tool_version": "0.1.0",
+  "generated_at": "2026-03-20T17:00:00+00:00",
+  "vault": {
+    "path": "D:/Vaults/research",
+    "note_count": 128,
+    "attachment_count": 302,
+    "file_count": 430,
+    "daily_note_count": 43,
+    "profile": "research"
+  },
+  "config": {
+    "default_profile": "research",
+    "profile": {
+      "name": "research",
+      "exclude_dirs": [
+        ".obsidian",
+        ".git",
+        "__pycache__"
+      ],
+      "exclude_globs": [],
+      "large_file_threshold_bytes": 5242880,
+      "forbidden_filetypes": [
+        ".pdf"
+      ],
+      "daily": {
+        "enabled": true,
+        "folder": "Daily",
+        "date_formats": [
+          "%Y-%m-%d"
+        ],
+        "expected_navigation": true
+      },
+      "naming": {
+        "enabled": true,
+        "min_count_per_style": 3,
+        "ratio_threshold": 0.15,
+        "include_notes": true,
+        "include_attachments": true
+      },
+      "template": {
+        "enabled": true,
+        "patterns": [
+          "<%[^%]*%>",
+          "\\{\\{\\s*date\\s*\\}\\}",
+          "\\{\\{\\s*title\\s*\\}\\}",
+          "\\{\\{[^}]+\\}\\}"
+        ]
+      },
+      "active_rules": null
+    }
+  },
+  "summary": {
+    "total_problems": 2,
+    "by_category": {
+      "link_integrity": 1,
+      "vault_policy": 1
+    },
+    "by_severity": {
+      "error": 1,
+      "warning": 1
+    },
+    "by_confidence": {
+      "high": 2
+    }
+  },
+  "problems": [
+    {
+      "id": "broken_wikilink:1",
+      "category": "link_integrity",
+      "severity": "error",
+      "confidence": "high",
+      "actionability": "manual_confirmation_required",
+      "title": "Broken wikilink",
+      "description": "Wikilink target does not resolve to existing note or attachment.",
+      "objects": [
+        {
+          "path": "Inbox/Note.md",
+          "line": 14,
+          "extra": {}
+        }
+      ],
+      "evidence": {
+        "raw": "[[Missing Note]]",
+        "target": "Missing Note"
+      },
+      "suggested_actions": [
+        "Create missing note/file or rename the link target.",
+        "If link is obsolete, remove or replace it."
+      ]
+    },
+    {
+      "id": "vault_policy_forbidden_filetype:1",
+      "category": "vault_policy",
+      "severity": "warning",
+      "confidence": "high",
+      "actionability": "manual_confirmation_required",
+      "title": "Forbidden filetype detected",
+      "description": "File extension is forbidden by current vault profile.",
+      "objects": [
+        {
+          "path": "Library/article.pdf",
+          "line": null,
+          "extra": {}
+        }
+      ],
+      "evidence": {
+        "extension": ".pdf",
+        "forbidden": [
+          ".pdf"
+        ]
+      },
+      "suggested_actions": [
+        "Move file outside vault or switch to allowed format."
+      ]
+    }
+  ]
+}

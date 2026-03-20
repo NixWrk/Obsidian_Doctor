@@ -1,0 +1,48 @@
+﻿default_profile: research
+
+profiles:
+  research:
+    exclude_dirs:
+      - .obsidian
+      - .git
+    exclude_globs:
+      - "**/.trash/**"
+    large_file_threshold_bytes: 5242880
+    forbidden_filetypes:
+      - .pdf
+      - .docx
+    daily:
+      enabled: true
+      folder: Daily
+      date_formats:
+        - "%Y-%m-%d"
+      expected_navigation: true
+    naming:
+      enabled: true
+      min_count_per_style: 3
+      ratio_threshold: 0.15
+      include_notes: true
+      include_attachments: true
+    template:
+      enabled: true
+      patterns:
+        - "<%[^%]*%>"
+        - "\\{\\{\\s*date\\s*\\}\\}"
+        - "\\{\\{\\s*title\\s*\\}\\}"
+    active_rules:
+      - broken_wikilink
+      - broken_markdown_link
+      - broken_embed
+      - orphan_note
+      - note_without_outbound_links
+      - unused_attachment
+      - duplicate_note_title
+      - duplicate_note_content
+      - duplicate_filename
+      - attachment_name_collision
+      - non_portable_filename
+      - mixed_naming_convention
+      - unresolved_template_artifact
+      - daily_chain_gap_or_mislink
+      - large_file_threshold
+      - vault_policy_forbidden_filetype

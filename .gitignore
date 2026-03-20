@@ -9,3 +9,7 @@ build/
 *.egg-info/
 reports/
 
+.tmp/
+.tmp_tests/
+.tmp_pytest/
+pytest-cache-files-*/
